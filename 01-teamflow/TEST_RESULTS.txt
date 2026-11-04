@@ -1,0 +1,8 @@
+Standalone module: build PASS; vet PASS; unit tests PASS.
+API/SQL on PGlite, single connection:
+=== RUN   TestTeamFlow
+--- PASS: TestTeamFlow (0.08s)
+=== RUN   TestIdempotencyAndAuth
+--- PASS: TestIdempotencyAndAuth (0.02s)
+PASS
+ok  	teamflow/tests	0.105s

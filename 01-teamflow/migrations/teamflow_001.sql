@@ -1,0 +1,4 @@
+CREATE TABLE tasks(tenant text NOT NULL,id text NOT NULL,title text NOT NULL CHECK(length(title) BETWEEN 1 AND 200),status text NOT NULL DEFAULT 'open' CHECK(status IN ('open','doing','done')),version integer NOT NULL DEFAULT 1,due_at timestamptz,created_at timestamptz NOT NULL DEFAULT now(),PRIMARY KEY(tenant,id));
+CREATE TABLE task_dependencies(tenant text NOT NULL,task_id text NOT NULL,depends_on text NOT NULL,CHECK(task_id<>depends_on),PRIMARY KEY(tenant,task_id,depends_on),FOREIGN KEY(tenant,task_id) REFERENCES tasks(tenant,id) ON DELETE CASCADE,FOREIGN KEY(tenant,depends_on) REFERENCES tasks(tenant,id));
+CREATE TABLE task_history(tenant text NOT NULL,task_id text NOT NULL,version integer NOT NULL,actor text NOT NULL,change jsonb NOT NULL,created_at timestamptz NOT NULL DEFAULT now(),PRIMARY KEY(tenant,task_id,version));
+CREATE INDEX task_listing ON tasks(tenant,status,created_at,id);

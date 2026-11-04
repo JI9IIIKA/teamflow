@@ -1,0 +1,518 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "TeamFlow",
+    "version": "0.1.0",
+    "description": "Командный таск-трекер; request examples and route contract. Exact required fields and invariants are validated by Go handlers."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "paths": {
+    "/tasks": {
+      "post": {
+        "operationId": "teamflow_post_tasks",
+        "summary": "POST /tasks",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "title": "Задача"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "teamflow_get_tasks",
+        "summary": "GET /tasks",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "operationId": "teamflow_get_tasks_id",
+        "summary": "GET /tasks/{id}",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "teamflow_patch_tasks_id",
+        "summary": "PATCH /tasks/{id}",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "version": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "title": "Задача",
+                "status": "done",
+                "version": 1
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "teamflow_delete_tasks_id",
+        "summary": "DELETE /tasks/{id}",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    },
+    "/tasks/{id}/dependencies": {
+      "post": {
+        "operationId": "teamflow_post_tasks_id_dependencies",
+        "summary": "POST /tasks/{id}/dependencies",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "depends_on": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "depends_on": "TASK_ID"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}/history": {
+      "get": {
+        "operationId": "teamflow_get_tasks_id_history",
+        "summary": "GET /tasks/{id}/history",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found or transition not applicable"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "413": {
+            "description": "Body exceeds 1 MiB"
+          },
+          "429": {
+            "description": "Rate limit"
+          },
+          "500": {
+            "description": "Internal error"
+          },
+          "503": {
+            "description": "Dependency unavailable"
+          }
+        }
+      }
+    }
+  }
+}
